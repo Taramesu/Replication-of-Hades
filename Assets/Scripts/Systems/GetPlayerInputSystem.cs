@@ -38,7 +38,7 @@ public partial class GetPlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        var curMoveInput = movementAction.ControlMap.PlayerMovement.ReadValue<Vector2>(); 
+        var curMoveInput = movementAction.ControlMap.PlayerMovement.ReadValue<Vector3>(); 
         SystemAPI.SetSingleton(new PlayerMoveInput { value = curMoveInput });
     }
 

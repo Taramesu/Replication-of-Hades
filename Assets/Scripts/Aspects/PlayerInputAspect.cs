@@ -6,6 +6,9 @@ using UnityEngine;
 
 readonly partial struct PlayerInputAspect : IAspect
 {
+    /// <summary>
+    /// 引用Component
+    /// </summary>
     readonly RefRW<PlayerMoveInput> moveInput;
     readonly RefRW<PlayerDashInput> dashInput;
     readonly RefRW<PlayerAttackInput> attackInput;
@@ -20,6 +23,9 @@ readonly partial struct PlayerInputAspect : IAspect
     readonly RefRW<PlayerReloadInput> reloadInput;
     readonly RefRW<PlayerScreenCaptureInput> screenCaptureInput;
 
+    /// <summary>
+    /// 重新设置输入数据函数配置
+    /// </summary>
     public void ResetInputData()
     {
         dashInput.ValueRW.value = false;
@@ -36,6 +42,9 @@ readonly partial struct PlayerInputAspect : IAspect
         screenCaptureInput.ValueRW.value = false;
     }
 
+    /// <summary>
+    /// 测试函数
+    /// </summary>
     public void print()
     {
         Debug.Log(specialInput.ValueRO.value);

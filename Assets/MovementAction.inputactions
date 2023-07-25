@@ -9,7 +9,7 @@
                     "name": "PlayerMovement",
                     "type": "Value",
                     "id": "539fbc28-31fc-430b-9b9c-512d22b7ec36",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -127,7 +127,7 @@
                 {
                     "name": "WASD",
                     "id": "e229e03b-fa41-4f26-b833-988cb69bd96b",
-                    "path": "2DVector",
+                    "path": "3DVector(mode=1)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -136,29 +136,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "08bac3fc-9c08-4d4e-a2df-e1fc978739d3",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PlayerMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "c2c42197-85c5-4665-bb20-e3c1456cc520",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PlayerMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
+                    "name": "Left",
                     "id": "15b286b1-5592-4e65-a22a-f562afd3eb47",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -169,9 +147,31 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Right",
                     "id": "49837b22-1aa5-40c5-a2fd-432fe4224331",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Forward",
+                    "id": "b5d8f292-792c-41c5-a161-1bc29d75ae9b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Backward",
+                    "id": "a722922a-45a5-42f7-9cba-4653e03fe651",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -9,7 +9,7 @@ namespace PlayerInput
 {
     public struct PlayerMoveInput : IComponentData
     {
-        public float2 value;
+        public float3 value;
     }
 
     public struct PlayerDashInput : IComponentData

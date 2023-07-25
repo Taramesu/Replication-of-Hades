@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
+using Move;
+using player;
 
 public class PlayerPropertyAuthoring : MonoBehaviour
 {
@@ -10,8 +12,10 @@ public class PlayerPropertyAuthoring : MonoBehaviour
         public override void Bake(PlayerPropertyAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            var PlayerTag = new player.PlayerTag { };
+            var PlayerTag = new PlayerTag { };
+            var MoveEnableTag = new MoveEnableTag { };
             AddComponent(entity, PlayerTag);
+            AddComponent(entity, MoveEnableTag);
         }
    }
 }

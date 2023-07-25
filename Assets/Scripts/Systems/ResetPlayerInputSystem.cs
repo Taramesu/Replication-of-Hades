@@ -1,3 +1,4 @@
+using Move;
 using player;
 using PlayerInput;
 using System.Collections;
@@ -15,14 +16,14 @@ public partial struct ResetPlayerInputSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var ecb = new EntityCommandBuffer(Allocator.Temp);
+        //var ecb = new EntityCommandBuffer(Allocator.Temp);
 
         foreach (var aspect  in SystemAPI.Query<PlayerInputAspect>())
         {
             aspect.ResetInputData();
         }
 
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
+        //ecb.Playback(state.EntityManager);
+        //ecb.Dispose();
     }
 }
