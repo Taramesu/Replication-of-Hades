@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
-using player;
+using PlayerComponents;
 using PlayerInput;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -66,7 +66,7 @@ public partial class GetPlayerInputSystem : SystemBase
 
     private void OnPlayerAttack(InputAction.CallbackContext obj)
     {
-        SystemAPI.SetSingleton(new PlayerAttackInput { value = true });
+        SystemAPI.SetSingleton(new PlayerAttackInput { value = true, position = Mouse.current.position.ReadValue()});
     }
 
     private void OnPlayerSpecial(InputAction.CallbackContext obj)

@@ -1,4 +1,6 @@
 using Move;
+using PlayerComponents;
+using PlayerInput;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
@@ -11,10 +13,10 @@ public partial struct MoveSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        foreach(var (moveAspect, linkAspect) in SystemAPI.Query<MoveAspect, InputLink2DataAspect>().WithAll<MoveEnableTag>())
+        foreach(var moveAspect in SystemAPI.Query<MoveAspect>().WithAll<MoveEnableTag>())
         {
             moveAspect.Move(SystemAPI.Time.DeltaTime);
-            linkAspect.Link();
+            moveAspect.SynchronousRotation();
         }
     }
 }

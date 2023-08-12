@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace PlayerInput
 {
+    public struct PlayerInputEnableTag : IComponentData { }
+
+    public struct PlayerInputtingTag : IComponentData { }
     public struct PlayerMoveInput : IComponentData
     {
         public float3 value;
@@ -20,6 +23,7 @@ namespace PlayerInput
     public struct PlayerAttackInput : IComponentData
     {
         public bool value;
+        public float2 position;
     }
 
     public struct PlayerSpecialInput : IComponentData

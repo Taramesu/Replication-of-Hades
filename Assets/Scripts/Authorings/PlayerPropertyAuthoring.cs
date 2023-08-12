@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
 using Move;
-using player;
+using PlayerComponents;
 
 public class PlayerPropertyAuthoring : MonoBehaviour
 {

@@ -14,5 +14,5 @@ namespace Move
 
     public struct MoveEnableTag : IComponentData { }
 
-
+    public struct MovingTag : IComponentData { }
 }
