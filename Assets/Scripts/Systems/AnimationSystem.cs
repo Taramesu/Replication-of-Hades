@@ -19,7 +19,6 @@ public partial struct AnimationSystem : ISystem
             GameObject go = GameObject.Instantiate(pgo.prefab);
             ecbBOS.AddComponent(entity, new TransformGO() { transform = go.transform });
             ecbBOS.AddComponent(entity, new AnimatorGO() { animator = go.GetComponent<Animator>() });
-            ecbBOS.AddComponent(entity, new CameraGO() { camera = go.GetComponent<GetCamera>().mainCamera });
             ecbBOS.RemoveComponent<PresentationGO>(entity);
         }
 
@@ -79,9 +78,8 @@ public partial struct AnimationSystem : ISystem
         }
         Camera camera = Camera.main;
         //摄像头鼠标点击坐标转换同步
-        foreach (var (cameraGO, attackState) in SystemAPI.Query<CameraGO,RefRW<AttackState>>())
+        foreach (var attackState in SystemAPI.Query<RefRW<AttackState>>())
         {
-            //attackState.ValueRW.targetWorldPosition = cameraGO.camera.ScreenToWorldPoint(attackState.ValueRO.targetMousePosition);
             var position = attackState.ValueRO.targetMousePosition;
             attackState.ValueRW.targetWorldPosition = camera.ScreenToWorldPoint(new Vector3(position.x,position.y,camera.nearClipPlane));
             attackState.ValueRW.targetWorldPosition.y = 0;

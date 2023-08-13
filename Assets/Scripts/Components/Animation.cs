@@ -19,9 +19,4 @@ namespace Animation
     {
         public Animator animator;
     }
-
-    public class CameraGO : IComponentData
-    {
-        public Camera camera;
-    }
 }
