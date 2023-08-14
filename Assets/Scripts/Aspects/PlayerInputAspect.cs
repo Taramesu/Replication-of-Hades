@@ -1,6 +1,4 @@
 using PlayerInput;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
@@ -40,13 +38,5 @@ readonly partial struct PlayerInputAspect : IAspect
         summonInput.ValueRW.value = false;
         reloadInput.ValueRW.value = false;
         screenCaptureInput.ValueRW.value = false;
-    }
-
-    /// <summary>
-    /// ²âÊÔº¯Êý
-    /// </summary>
-    public void print()
-    {
-        Debug.Log(specialInput.ValueRO.value);
     }
 }

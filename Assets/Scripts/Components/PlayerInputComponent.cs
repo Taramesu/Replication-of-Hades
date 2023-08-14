@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace PlayerInput
 {
     public struct PlayerInputEnableTag : IComponentData { }
