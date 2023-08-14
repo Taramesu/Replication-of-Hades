@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.UI;
-
 namespace PlayerInput
 {
+    public struct PlayerInputEnableTag : IComponentData { }
+
+    public struct PlayerInputtingTag : IComponentData { }
     public struct PlayerMoveInput : IComponentData
     {
-        public float2 value;
+        public float3 value;
     }
 
     public struct PlayerDashInput : IComponentData
@@ -20,6 +18,7 @@ namespace PlayerInput
     public struct PlayerAttackInput : IComponentData
     {
         public bool value;
+        public float2 position;
     }
 
     public struct PlayerSpecialInput : IComponentData

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
-using player;
+using PlayerComponents;
 using PlayerInput;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -38,7 +38,7 @@ public partial class GetPlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        var curMoveInput = movementAction.ControlMap.PlayerMovement.ReadValue<Vector2>(); 
+        var curMoveInput = movementAction.ControlMap.PlayerMovement.ReadValue<Vector3>(); 
         SystemAPI.SetSingleton(new PlayerMoveInput { value = curMoveInput });
     }
 
@@ -66,7 +66,7 @@ public partial class GetPlayerInputSystem : SystemBase
 
     private void OnPlayerAttack(InputAction.CallbackContext obj)
     {
-        SystemAPI.SetSingleton(new PlayerAttackInput { value = true });
+        SystemAPI.SetSingleton(new PlayerAttackInput { value = true, position = Mouse.current.position.ReadValue()});
     }
 
     private void OnPlayerSpecial(InputAction.CallbackContext obj)
