@@ -1,7 +1,7 @@
 [
   {
-    "TraitID": 1001,
-    "TraitSocketType": 1,
+    "TraitID": 10011,
+    "TraitName": "",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -14,8 +14,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 1002,
-    "TraitSocketType": 1,
+    "TraitID": 10022,
+    "TraitName": "",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -28,8 +28,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 1003,
-    "TraitSocketType": 2,
+    "TraitID": 10033,
+    "TraitName": "",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -42,8 +42,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 1004,
-    "TraitSocketType": 3,
+    "TraitID": 10044,
+    "TraitName": "",
     "Probability": 0.6,
     "TraitRarities": [
       1,
@@ -53,13 +53,13 @@
     "Rate": 1,
     "Describe": "",
     "PreTrait1": [
-      1001
+      10011
     ],
     "PreTrait2": []
   },
   {
-    "TraitID": 2001,
-    "TraitSocketType": 1,
+    "TraitID": 20011,
+    "TraitName": "",
     "Probability": 0.3,
     "TraitRarities": [
       1,
@@ -72,8 +72,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 2002,
-    "TraitSocketType": 2,
+    "TraitID": 20022,
+    "TraitName": "",
     "Probability": 0.4,
     "TraitRarities": [
       1,
@@ -86,8 +86,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 2003,
-    "TraitSocketType": 2,
+    "TraitID": 20033,
+    "TraitName": "",
     "Probability": 0.4,
     "TraitRarities": [
       1,
@@ -100,8 +100,8 @@
     "PreTrait2": []
   },
   {
-    "TraitID": 2004,
-    "TraitSocketType": 3,
+    "TraitID": 20044,
+    "TraitName": "",
     "Probability": 0.6,
     "TraitRarities": [
       1,
@@ -111,10 +111,10 @@
     "Rate": 1,
     "Describe": "",
     "PreTrait1": [
-      1001
+      10011
     ],
     "PreTrait2": [
-      2002
+      20022
     ]
   }
 ]

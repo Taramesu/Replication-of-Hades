@@ -34,7 +34,8 @@ namespace TraitComponents
     public struct TraitData
     {
         public int traitID;
-        public int socketType;
+        public string traitName;
+        //public int socketType;
         public float probability;
         public List<int> rarityTypes;
         public float rate;
@@ -43,23 +44,65 @@ namespace TraitComponents
         public List<int> preTrait2;
     }
 
-    public struct ExistingTraitData
+    public struct PickedTraitData
     {
+        public int traitID;
+        //public int socketType;
         public int rarity;
-        public int level;
-        public int socketType;
+        public int level;       
+    }
+    public struct PickableTraitData
+    {
+        public int traitID;
+        public float probability;
+        //public int socketType;
+        public NativeList<int> preTrait1;
+        public NativeList<int> preTrait2;
     }
 
     struct TraitDataTag : IComponentData { }
 
-    struct IsRandomTrait:IComponentData 
+    struct RandomCount : IComponentData
     {
-        public bool value;
+        public float value;
+    }
+    struct PickedTrait
+    {
+        public int type;
+        //public NativeHashMap<int, PickedTraitData> value;
+        public NativeList<PickedTraitData> value;
+    }
+    [ChunkSerializable]
+    struct PickedTraitDic : IComponentData
+    {       
+        public NativeList<PickedTrait> value;
+    }
+    struct PickableTrait
+    {
+        //public NativeHashMap<int, PickableTraitData> value;
+        public int type;
+        public NativeList<PickableTraitData> value;
+    }
+    [ChunkSerializable]
+    struct PickableTraitDic : IComponentData
+    {
+        public NativeList<PickableTrait> value;
+    }
+
+    [ChunkSerializable]
+    struct PickedSocket : IComponentData
+    {
+        public NativeList<int> value;
+    }
+
+    struct RandomTrait:IComponentData 
+    {
+        
     }
 
     struct TraitTypeTag : IComponentData
     {
-        public TraitType traitType;
+        public TraitType value;
     }   
 }
 

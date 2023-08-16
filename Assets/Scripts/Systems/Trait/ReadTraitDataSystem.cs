@@ -6,6 +6,7 @@ using Unity.Entities;
 using TraitComponents;
 using System;
 using Unity.Burst;
+using Unity.Collections;
 
 [UpdateInGroup(typeof(InitializationSystemGroup), OrderLast = true)]
 public partial class ReadTraitDataSystem : SystemBase
@@ -21,8 +22,10 @@ public partial class ReadTraitDataSystem : SystemBase
         {
             TraitData traitData = new TraitData();            
             traitData.traitID = ((int)traitDataJson["TraitID"]);
-            var traitType = (TraitType)Enum.Parse(typeof(TraitType), (traitData.traitID/100).ToString());
-            traitData.socketType = (int)traitDataJson["TraitSocketType"];
+            var traitType = (TraitType)Enum.Parse(typeof(TraitType), (traitData.traitID/10000).ToString());
+
+            traitData.traitName = traitDataJson["TraitName"].ToString();
+            //traitData.socketType = (int)traitDataJson["TraitSocketType"];
             traitData.probability= float.Parse(traitDataJson["Probability"].ToString());
             traitData.rarityTypes = new List<int>();
             foreach (JsonData item in traitDataJson["TraitRarities"])
@@ -42,11 +45,8 @@ public partial class ReadTraitDataSystem : SystemBase
                 traitData.preTrait2.Add((int)item);
             }
 
-            if (!Datas.TraitDic.ContainsKey(traitType)) Datas.TraitDic.Add(traitType, new List<TraitData>());
-            Datas.TraitDic[traitType].Add(traitData);
-            if (!Datas.SocketTrait.ContainsKey(traitData.socketType)) Datas.SocketTrait.Add(traitData.socketType, new List<int>());
-            Datas.SocketTrait[traitData.socketType].Add(traitData.traitID);
-            if (traitData.preTrait1.Count <= 0 && traitData.preTrait2.Count <= 0) Datas.RandomizableTrait.Add(traitData.traitID, traitData.probability);
+            if (!Datas.TraitDic.ContainsKey(traitType)) Datas.TraitDic.Add(traitType, new Dictionary<int, TraitData>());
+            Datas.TraitDic[traitType].Add(traitData.traitID,traitData);            
         }
 
         /*Entity entity =  EntityManager.CreateEntity();

@@ -13,8 +13,8 @@ public class TraitEntityAuthoring : MonoBehaviour
         public override void Bake(TraitEntityAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            var traitType = new TraitTypeTag { traitType = authoring.traitType };
-            var isRandom = new IsRandomTrait { value = false };
+            var traitType = new TraitTypeTag { value = authoring.traitType };
+            var isRandom = new RandomTrait();
 
             AddComponent(entity, traitType);
             AddComponent(entity, isRandom);
