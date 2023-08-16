@@ -30,18 +30,18 @@ public partial class RandomTraitSystem : SystemBase
     {
         //var ecbBOS = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(World.Unmanaged);
 
-        Entities
+        /*Entities
             .WithAll<TraitTypeTag, RandomTrait>()
             .ForEach
             ((Entity entity, in TraitTypeTag traitTypeTag, in RandomTrait isRandomTrait) =>
         {
             //RandomTrait(traitTypeTag);
             //entityCommandBuffer.DestroyEntity(entityInQueryIndex,entity);
-        }).Schedule();
+        }).Schedule();*/
 
         foreach (var traitTypeTag in SystemAPI.Query<RefRO<TraitTypeTag>>().WithAll<RandomTrait>())
         {
-            //RandomTrait(traitTypeTag);
+            RandomTrait(traitTypeTag);
         }
         //Debug.Log(Datas.TraitDic.Count);
         //jobHandle.Complete();
