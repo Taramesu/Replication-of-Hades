@@ -12,6 +12,7 @@ public partial struct AnimationSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
+        Camera camera = Camera.main;
         var ecbBOS = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
         //组件获取(反应式系统)
         foreach (var (pgo, entity) in SystemAPI.Query<PresentationGO>().WithEntityAccess())
@@ -27,6 +28,12 @@ public partial struct AnimationSystem : ISystem
         {
             goTransform.transform.position = transform.Position;
             goTransform.transform.rotation = transform.Rotation;
+        }
+
+        //相机跟随
+        foreach(var transform in SystemAPI.Query<LocalTransform>())
+        {
+            camera.transform.localPosition = new Vector3(transform.Position.x, camera.transform.localPosition.y, transform.Position.z);
         }
 
         //动画控制同步状态机
@@ -76,7 +83,7 @@ public partial struct AnimationSystem : ISystem
                 attackInfo.ValueRW.stateInfo = stateInfo.normalizedTime;
             }
         }
-        Camera camera = Camera.main;
+        
         //摄像头鼠标点击坐标转换同步
         foreach (var attackState in SystemAPI.Query<RefRW<AttackState>>())
         {
