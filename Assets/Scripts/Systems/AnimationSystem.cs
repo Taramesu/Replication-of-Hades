@@ -23,6 +23,14 @@ public partial struct AnimationSystem : ISystem
             ecbBOS.RemoveComponent<PresentationGO>(entity);
         }
 
+        //组件数据初始化
+        foreach (var (iniTag, entity) in SystemAPI.Query<InitializeTag>().WithEntityAccess())
+        {
+            ecbBOS.SetComponentEnabled<RunState>(entity,false);
+            ecbBOS.SetComponentEnabled<AttackState>(entity,false);
+            ecbBOS.RemoveComponent<InitializeTag>(entity);
+        }
+
         //位置同步
         foreach (var (goTransform, transform) in SystemAPI.Query<TransformGO, LocalTransform>())
         {
@@ -42,14 +50,15 @@ public partial struct AnimationSystem : ISystem
             switch(stateChanged.from)
             {
                 case PlayerFsmState.Idle:
-                    ecbBOS.RemoveComponent<IdleState>(entity);
+                    ecbBOS. SetComponentEnabled<IdleState>(entity,false);
                     break;
                 case PlayerFsmState.Run:
-                    ecbBOS.RemoveComponent<RunState>(entity);
+                    ecbBOS.SetComponentEnabled<RunState>(entity, false);
                     break;
                 case PlayerFsmState.Attack:
-                    ecbBOS.RemoveComponent<AttackState>(entity);
-                    ecbBOS.AddComponent<MoveEnableTag>(entity);
+                    ecbBOS.SetComponentEnabled<AttackState>(entity, false);
+                    ecbBOS.SetComponentEnabled<MoveEnableTag>(entity, true);
+                    ecbBOS.SetComponentEnabled<AttackEnableTag>(entity, true);
                     break;
             }
 
@@ -58,30 +67,33 @@ public partial struct AnimationSystem : ISystem
             switch (stateChanged.to)
             {
                 case PlayerFsmState.Idle:
-                    ecbBOS.AddComponent<IdleState>(entity);
+                    ecbBOS.SetComponentEnabled<IdleState>(entity, true);
                     animatorGO.animator.Play("Idle");
                     break;
                 case PlayerFsmState.Run:
-                    ecbBOS.AddComponent<RunState>(entity);
+                    ecbBOS.SetComponentEnabled<RunState>(entity, true);
                     animatorGO.animator.Play("Run");
                     break;
                 case PlayerFsmState.Attack:
-                    ecbBOS.AddComponent<AttackState>(entity);
-                    ecbBOS.RemoveComponent<MoveEnableTag>(entity);
+                    ecbBOS.SetComponentEnabled<AttackState>(entity, true);
+                    ecbBOS.SetComponentEnabled<MoveEnableTag>(entity, false);
                     animatorGO.animator.Play("Attack");
                     break;
             }
-            ecbBOS.RemoveComponent<FsmStateChanged>(entity);
+            ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, false);
+            //ecbBOS.RemoveComponent<FsmStateChanged>(entity);
         }
 
         //动画播放进度同步
-        foreach (var (animatorGO,attackInfo) in SystemAPI.Query<AnimatorGO,RefRW<AttackState>>())
+        foreach (var (animatorGO,stateInfo) in SystemAPI.Query<AnimatorGO,RefRW<AniStateInfo>>())
         {
-            var stateInfo = animatorGO.animator.GetCurrentAnimatorStateInfo(0);
-            if(stateInfo.IsName("Attack"))
-            {
-                attackInfo.ValueRW.stateInfo = stateInfo.normalizedTime;
-            }
+            animatorGO.animator.GetCurrentAnimatorStateInfo(0);
+            stateInfo.ValueRW.value = animatorGO.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            //if (stateInfo.IsName("Attack"))
+            //{
+            //    attackInfo.ValueRW.stateInfo = stateInfo.normalizedTime;
+            //    Debug.Log("attackAni");
+            //}
         }
         
         //摄像头鼠标点击坐标转换同步
@@ -90,7 +102,8 @@ public partial struct AnimationSystem : ISystem
             var position = attackState.ValueRO.targetMousePosition;
             attackState.ValueRW.targetWorldPosition = camera.ScreenToWorldPoint(new Vector3(position.x,position.y,camera.nearClipPlane));
             attackState.ValueRW.targetWorldPosition.y = 0;
-            Debug.Log(attackState.ValueRO.targetWorldPosition);
+            //Debug.Log(attackState.ValueRO.targetWorldPosition);
+            //Debug.Log(attackState.ValueRO.isAttacking);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Move
         public float speed;
     }
 
-    public struct MoveEnableTag : IComponentData { }
+    public struct MoveEnableTag : IComponentData,IEnableableComponent { }
 
-    public struct MovingTag : IComponentData { }
+    public struct MovingTag : IComponentData,IEnableableComponent { }
 }

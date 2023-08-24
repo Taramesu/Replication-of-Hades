@@ -13,16 +13,16 @@ public partial struct AttackStateSystem : ISystem
     {
         var ecbBOS = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-        foreach (var ( playerState,transform, entity) in SystemAPI.Query<RefRO<AttackState>,RefRW<LocalTransform>>().WithEntityAccess().WithAll<AttackState>())
+        foreach (var ( playerState,aniStateInfo,transform, entity) in SystemAPI.Query<RefRW<AttackState>,RefRO<AniStateInfo>,RefRW<LocalTransform>>().WithEntityAccess().WithAll<AttackState>())
         {
             var forward = math.normalize(new float3(playerState.ValueRO.targetWorldPosition) - transform.ValueRO.Position);
             transform.ValueRW.Rotation = Quaternion.LookRotation(forward, math.up());
 
-            //Debug.Log(playerState.ValueRO.targetWorldPosition);
+            ecbBOS.SetComponentEnabled<AttackEnableTag>(entity, false);
 
-            if (playerState.ValueRO.stateInfo>0.95f)
+            if (aniStateInfo.ValueRO.value > 0.95f)
             {
-                ecbBOS.AddComponent<FsmStateChanged>(entity);
+                ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, true);
                 ecbBOS.SetComponent(entity, new FsmStateChanged
                 {
                     from = PlayerFsmState.Attack,

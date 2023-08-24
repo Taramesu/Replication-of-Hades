@@ -14,7 +14,8 @@ public partial struct RunStateSystem : ISystem
         {
             if(!aspect.GetMoving())
             {
-                ecbBOS.AddComponent<FsmStateChanged>(entity);
+                ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, true);
+                //ecbBOS.AddComponent<FsmStateChanged>(entity);
                 ecbBOS.SetComponent(entity, new FsmStateChanged
                 {
                     from = PlayerFsmState.Run,
