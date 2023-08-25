@@ -10,63 +10,37 @@ using UnityEngine;
 using Unity.Collections;
 using PlayerComponents;
 using UnityEditor.Experimental.GraphView;
+using UIFrameWork;
 
 [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
 [UpdateAfter(typeof(InitializationSystemGroup))]
 public partial class RandomTraitSystem : SystemBase
 {
-    bool isFinish;
     HashSet<int> randomList;
     List<PickedTraitData> res;
 
     protected override void OnCreate()
     {
-        isFinish = false;
         randomList = new HashSet<int>() {10011,10022 };
         res = new List<PickedTraitData>();
     }
 
     protected override void OnUpdate()
     {
-        //var ecbBOS = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(World.Unmanaged);
+        var ecbBOS = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(World.Unmanaged);
 
-        /*Entities
-            .WithAll<TraitTypeTag, RandomTrait>()
-            .ForEach
-            ((Entity entity, in TraitTypeTag traitTypeTag, in RandomTrait isRandomTrait) =>
+        foreach (var (traitTypeTag, entity) in SystemAPI.Query<RefRO<TraitTypeTag>>().WithAll<RandomTrait>().WithEntityAccess())
         {
-            //RandomTrait(traitTypeTag);
-            //entityCommandBuffer.DestroyEntity(entityInQueryIndex,entity);
-        }).Schedule();*/
-
-        foreach (var traitTypeTag in SystemAPI.Query<RefRO<TraitTypeTag>>().WithAll<RandomTrait>())
-        {
-            RandomTrait(traitTypeTag);
-        }
-        //Debug.Log(Datas.TraitDic.Count);
-        //jobHandle.Complete();
-
-        /*for (int i = 0; i < traitEntities.Length; i++)
-        {
-            EntityManager.DestroyEntity(traitEntities[i]);
-        }*/
-        if (isFinish)
-        {
-            EntityQuery entitys = this.GetEntityQuery(typeof(RandomTrait));
-            EntityManager.DestroyEntity(entitys);
-            Debug.Log("共抽取"+res.Count+"个祝福");
-            foreach(var item in res)
-            {
-                Debug.Log("ID:" + item.traitID);
-                Debug.Log("稀有度" + item.rarity);
-            }
-            isFinish = false;
+            RandomTraits(traitTypeTag);            
+            PanelManager.Instance.Push(new TraitSelectionPanel(res.ToArray()));
+            ecbBOS.DestroyEntity(entity);
+            break;
         }
     }
 
-    private void RandomTrait(RefRO<TraitTypeTag> traitTypeTag)
+    private void RandomTraits(RefRO<TraitTypeTag> traitTypeTag)
     {
-        foreach (var playerTraitAspect in SystemAPI.Query<PlayerTraitAspect>().WithAll<PlayerTag>())
+        foreach (var playerTraitAspect in SystemAPI.Query<PlayerTraitAspect>())
         {
             Dictionary<int, TraitData> dic = Datas.TraitDic[traitTypeTag.ValueRO.value];
             var pickedTrait = playerTraitAspect.GetAllPickedTrait();
@@ -134,8 +108,6 @@ public partial class RandomTraitSystem : SystemBase
                 ptd.level = 1;
                 res.Add(ptd);
             }   
-            
-            isFinish = true;
         }
         //var sockets = playerTraitAspect.GetAllPickableSocket();        
     }

@@ -1,7 +1,7 @@
 [
   {
     "TraitID": 10011,
-    "TraitName": "",
+    "TraitName": "宙斯祝福1",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -9,13 +9,13 @@
       3
     ],
     "Rate": 1.25,
-    "Describe": "",
+    "Describe": "这是宙斯祝福1",
     "PreTrait1": [],
     "PreTrait2": []
   },
   {
     "TraitID": 10022,
-    "TraitName": "",
+    "TraitName": "宙斯祝福2",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -23,13 +23,13 @@
       3
     ],
     "Rate": 1.3,
-    "Describe": "",
+    "Describe": "这是宙斯祝福2",
     "PreTrait1": [],
     "PreTrait2": []
   },
   {
     "TraitID": 10033,
-    "TraitName": "",
+    "TraitName": "宙斯祝福3",
     "Probability": 0.5,
     "TraitRarities": [
       1,
@@ -37,13 +37,13 @@
       3
     ],
     "Rate": 1,
-    "Describe": "",
+    "Describe": "这是宙斯祝福3",
     "PreTrait1": [],
     "PreTrait2": []
   },
   {
     "TraitID": 10044,
-    "TraitName": "",
+    "TraitName": "宙斯祝福4",
     "Probability": 0.6,
     "TraitRarities": [
       1,
@@ -51,7 +51,7 @@
       3
     ],
     "Rate": 1,
-    "Describe": "",
+    "Describe": "这是宙斯祝福4",
     "PreTrait1": [
       10011
     ],

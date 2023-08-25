@@ -104,5 +104,9 @@ namespace TraitComponents
     {
         public TraitType value;
     }   
+    struct RandomTraitList : IComponentData
+    {
+        public NativeArray<PickedTraitData> value;
+    }
 }
 

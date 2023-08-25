@@ -17,7 +17,7 @@ public class GameRoot : MonoBehaviour
     }
     private void Start()
     {
-        SceneSystem.Instance.SetScene(new MainMenuScene());
+        //SceneSystem.Instance.SetScene(new GameScene());
     }
 
     public void SwitchScene(string sceneName)
