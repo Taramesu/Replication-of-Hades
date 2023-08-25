@@ -11,22 +11,27 @@ namespace PlayerComponents
         Attack
     }
 
-    struct IdleState : IComponentData
+    struct IdleState : IComponentData,IEnableableComponent
     {
 
     }
-    struct RunState : IComponentData
+    struct RunState : IComponentData, IEnableableComponent
     {
         
     }
-    struct AttackState : IComponentData
+    struct AttackState : IComponentData, IEnableableComponent
     {
-        public float stateInfo;
         public float2 targetMousePosition;
         public float3 targetWorldPosition;
+        public bool isAttacking;
     }
 
-    struct FsmStateChanged : IComponentData 
+    struct AniStateInfo : IComponentData
+    {
+        public float value;
+    }
+
+    struct FsmStateChanged : IComponentData,IEnableableComponent
     {
         public PlayerFsmState from;
         public PlayerFsmState to;
@@ -42,5 +47,10 @@ namespace PlayerComponents
         public float HP;//0:to death 100:health
     }
 
-    struct PlayerTag : IComponentData { }
+    struct PlayerTag : IComponentData, IEnableableComponent{ }
+
+    struct InitializeTag : IComponentData { }
+
+    struct AttackEnableTag : IComponentData, IEnableableComponent { }
+
 }

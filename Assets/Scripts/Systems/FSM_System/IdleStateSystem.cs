@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [BurstCompile]
 public partial struct IdleStateSystem : ISystem
@@ -18,7 +19,8 @@ public partial struct IdleStateSystem : ISystem
         {
             if (moveAspect.GetMoving())
             {
-                ecbBOS.AddComponent<FsmStateChanged>(entity);
+                ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, true);
+                //ecbBOS.AddComponent<FsmStateChanged>(entity);
                 ecbBOS.SetComponent(entity, new FsmStateChanged
                 {
                     from = PlayerFsmState.Idle,
@@ -31,12 +33,15 @@ public partial struct IdleStateSystem : ISystem
         {
             if (input.value)
             {
-                ecbBOS.AddComponent<FsmStateChanged>(entity);
+                ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, true);
+                //ecbBOS.AddComponent<FsmStateChanged>(entity);
                 ecbBOS.SetComponent(entity, new FsmStateChanged
                 {
                     from = PlayerFsmState.Idle,
                     to = PlayerFsmState.Attack
                 });
+                //Debug.Log(input.value);
+                //Debug.Log();
             }
         }
     }

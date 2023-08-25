@@ -19,7 +19,7 @@ public partial struct LinkInputDataSystem : ISystem
             moveData.ValueRW.dir = input.ValueRO.value;
         }
 
-        foreach (var (attackState,input) in SystemAPI.Query<RefRW<AttackState>,RefRO<PlayerAttackInput>>())
+        foreach (var (attackState,input) in SystemAPI.Query<RefRW<AttackState>,RefRO<PlayerAttackInput>>().WithAll<AttackEnableTag>())
         {
             attackState.ValueRW.targetMousePosition = input.ValueRO.position;
         }
