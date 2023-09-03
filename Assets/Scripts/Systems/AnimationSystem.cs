@@ -81,7 +81,6 @@ public partial struct AnimationSystem : ISystem
                     break;
             }
             ecbBOS.SetComponentEnabled<FsmStateChanged>(entity, false);
-            //ecbBOS.RemoveComponent<FsmStateChanged>(entity);
         }
 
         //动画播放进度同步
@@ -89,11 +88,6 @@ public partial struct AnimationSystem : ISystem
         {
             animatorGO.animator.GetCurrentAnimatorStateInfo(0);
             stateInfo.ValueRW.value = animatorGO.animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            //if (stateInfo.IsName("Attack"))
-            //{
-            //    attackInfo.ValueRW.stateInfo = stateInfo.normalizedTime;
-            //    Debug.Log("attackAni");
-            //}
         }
         
         //摄像头鼠标点击坐标转换同步
@@ -102,8 +96,6 @@ public partial struct AnimationSystem : ISystem
             var position = attackState.ValueRO.targetMousePosition;
             attackState.ValueRW.targetWorldPosition = camera.ScreenToWorldPoint(new Vector3(position.x,position.y,camera.nearClipPlane));
             attackState.ValueRW.targetWorldPosition.y = 0;
-            //Debug.Log(attackState.ValueRO.targetWorldPosition);
-            //Debug.Log(attackState.ValueRO.isAttacking);
         }
     }
 }
